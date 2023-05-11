@@ -1,41 +1,46 @@
 #dodelat fajtení s kostkama
-# funkce která definuje nepratele a jejich zivoty
+
 import keyboard
 
 def weapons():
 
     weapons=["fists","baton","knife","pistol","shotgun","smg","m4","rpg"]
-    dmg = [5,15,20,25,30,35,40,50,80]
 
-    weapon_dmg_dict = {}
-    for i in range(len(weapons)):
-       weapon_dmg_dict[weapons[i]] = dmg[i]
-    return weapon_dmg_dict
+    return weapons
 
 def enemies_hp():
     import random
     enemies=["prisoner", "prison guard", "policeman", "swat", "solider"]
-    hp = [50, 75, 100, 125, 150]
+    enemy_weapons = ["baton", 75, 100, 125, 150]
     weapons()
 
     enemies_hp_dict = {}
 
     for i in range(len(enemies)):
-        enemies_hp_dict[enemies[i]] = hp[i]
+        enemies_hp_dict[enemies[i]] = enemy_weapons[i]
+    equiped_weapon = random.choice(weapons())
 
-    print(f"you encountered a {random.choice(list(enemies_hp_dict.items()))} = HP and you have {random.choice(list(weapons().items()))} =DMG")
+    print(f"you encountered a {random.choice(enemies)}  and you have {equiped_weapon}")
 
-    def fight_keys():
-        print("Press 'f' to fight or 'e' to escape.")
+
+    equiped_weapons_dict = {"fists": 20, "baton": 18, "knife": 16, "pistol": 14, "shotgun": 12, "smg": 10, "m4": 8, "rpg": 6}
+    #enemy_weapons_dict = {"prisoner":"baton","prison guard": "pistol","policeman":, "pistol": 14, "shotgun": 12, "smg": 10, "m4": 8, "rpg": 6}
+
+    #bojovani
+    def fight():
+    #vystetlit kostku
+        hrana = equiped_weapons_dict[equiped_weapon]
+        print(f"Press 'f' to fight or 'e' to escape. The {equiped_weapon} grants you a {hrana} sided dice" )
         while True:
             if keyboard.is_pressed('f'):
                 print("You are going to fight him.")
-                kostka1 = (random.randint(1,6))
+                kostka1 = (random.randint(1,hrana))
                 print(f"you got a {kostka1} on your the dice")
-                if kostka1 == {6,5,4}:
-                    print("you killed him, great!")
-                if kostka1 =={3,2,1}:
+                if kostka1 > 5:
                     print("you got your ass kicked and ran away")
+
+                if kostka1 <= 5:
+                    print("you killed him, great!")
                 return False
 
 
@@ -45,15 +50,13 @@ def enemies_hp():
             else:
                 pass
 
-    fight_keys()
+    fight()
     return enemies
 
 enemies_hp()
 
 
-def enemies_dmg():
-    enemies = enemies_hp()
-    dmg = [50, 75, 100, 125, 150]
+
 
 
     enemies_dmg_dict = {}
@@ -84,6 +87,3 @@ def enemies_dmg():
 #def budget():
     budget = 0
     print(f"you have {budget} $")
-def hp_player():
-    hp_player = 100
-    return hp_player
